@@ -5,6 +5,9 @@ import os, sys
 
 appDirectory = ""
 
+# ShowHelp(detailed)
+#
+# Shows detailed help if detailed is set to true, shows brief help otherwise
 def ShowHelp(detailed):
     if(detailed):
         print("\necoscore.py")
