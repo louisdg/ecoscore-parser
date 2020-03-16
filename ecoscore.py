@@ -6,6 +6,21 @@ import os, sys
 appDirectory = ""
 verbose = False
 
+# Color
+#
+# Enables text formatting in outputs
+class Color:
+    end = '\033[0m'
+    bold = '\033[1m'
+    underline = '\033[4m'
+    darkcyan = '\033[36m'
+    red = '\033[91m'
+    green = '\033[92m'
+    yellow = '\033[93m'
+    blue = '\033[94m'
+    purple = '\033[95m'
+    cyan = '\033[96m'
+
 # ShowHelp(detailed)
 #
 # Shows detailed help if detailed is set to true, shows brief help otherwise
