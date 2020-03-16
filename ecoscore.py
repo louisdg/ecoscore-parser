@@ -4,6 +4,7 @@
 import os, sys
 
 appDirectory = ""
+verbose = False
 
 # ShowHelp(detailed)
 #
@@ -22,3 +23,32 @@ def ShowHelp(detailed):
         print("\nUsage")
         print("\n\tpython3 ecoscore.py [OPTION]... APP_DIRECTORY")
         print("\n\tUse option --help for detailed help.")
+
+# ParseArguments()
+#
+# Parses the arguments and sets different variables, and shows help if necessary
+def ParseArguments():
+    # if the program is called without any arguments
+    if len(sys.argv) <= 1:
+        # show help
+        ShowHelp(False)
+    else:
+        # look at arguments
+        for i in range(1, len(sys.argv)):
+            arg = sys.argv[i]
+
+            if arg == "--help":
+                # show detailed help
+                ShowHelp(True)
+            elif arg == "-v" or arg == "--verbose":
+                # activate verbose mode
+                verbose = True
+            # if the directory's path is not in last position
+            elif(i != len(sys.argv) - 1):
+                # show help
+                ShowHelp(False)
+            # this is the directory's path
+            else:
+                appDirectory = arg
+
+ParseArguments()
