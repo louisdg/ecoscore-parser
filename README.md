@@ -28,3 +28,4 @@ Mandatory arguments to long options are mandatory for short options too.
   print a message for each file analysed
 
 * `--help`
+  display help and exit
