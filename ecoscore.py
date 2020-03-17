@@ -28,15 +28,15 @@ def ShowHelp(detailed):
     if(detailed):
         print("ecoscore.py")
         print("\n" + Color.bold + "SYNOPSIS" + Color.end)
-        print("\n\t" + Color.bold + "python3 ecoscore.py" + Color.end + " [" + Color.underline + "OPTION" + Color.end + "]... " + Color.underline + "APP_DIRECTORY" + Color.end)
+        print("\n\t" + Color.bold + "python3 ecoscore.py" + Color.end + " [" + Color.underline + "OPTION" + Color.end + "]... " + Color.underline + "DIRECTORY" + Color.end)
         print("\n" + Color.bold + "DESCRIPTION" + Color.end)
-        print("\n\tAnalyses and gives a score to the app located in the directory APP_DIRECTORY.")
+        print("\n\tAnalyses and gives a score to the app located in DIRECTORY.")
         print("\n\tMandatory arguments to long options are mandatory for short options too.")
         print("\n\t" + Color.bold + "-v" + Color.end + ", " + Color.bold + "--verbose" + Color.end, "\t\tprint a message for each file analysed", sep="\n")
         print("\n\t" + Color.bold + "--help" + Color.end, "\t\tdisplay help and exit", sep="\n")
     else:
         print(Color.bold + "SYNOPSIS" + Color.end)
-        print("\n\t" + Color.bold + "python3 ecoscore.py" + Color.end + " [" + Color.underline + "OPTION" + Color.end + "]... " + Color.underline + "APP_DIRECTORY" + Color.end)
+        print("\n\t" + Color.bold + "python3 ecoscore.py" + Color.end + " [" + Color.underline + "OPTION" + Color.end + "]... " + Color.underline + "DIRECTORY" + Color.end)
         print("\n\tUse option " + Color.bold + "--help" + Color.end + " for detailed help.")
 
 # ParseArguments()
