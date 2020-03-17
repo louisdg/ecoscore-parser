@@ -1,3 +1,30 @@
 # ecoscore-parser
 
-Ecoscore est un programme qui parcourt les fichiers d'une application web et analyse les lignes de code pour voir si l'application suit les pratiques recommandées pour l'économie de ressources. Elle donne un score à l'application.
+Ecoscore is a program that scans through a web app directory and analyses files of code.
+
+It judges the app's eco-friendliness by looking at common recommended practices for resource saving.
+
+It will give a score to the app depending on how much it respects these practices.
+
+## Requirements
+
+* `python3`
+
+## Usage
+
+### Synopsis
+
+```
+python3 ecoscore.py [OPTION]... DIRECTORY
+```
+
+### Description
+
+Analyses and gives a score to the app located in `DIRECTORY`.
+
+Mandatory arguments to long options are mandatory for short options too.
+
+* `-v`, `--verbose`
+  print a message for each file analysed
+
+* `--help`
