@@ -92,4 +92,9 @@ def ListFiles(dirPath):
 ParseArguments()
 
 files = ListFiles(appDirectory)
-print(files)
+print("Found " + str(len(files["php"])) + " PHP files and " + str(len(files["js"])) + " JS files, for a total of " + str(len(files["php"]) + len(files["js"])) + " files.")
+if verbose:
+    for lang, filePaths in files.items():
+        print(lang + ":")
+        for filePath in filePaths:
+            print("\t" + filePath)
