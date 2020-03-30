@@ -57,6 +57,7 @@ def ParseArguments():
                 ShowHelp(True)
             elif arg == "-v" or arg == "--verbose":
                 # activate verbose mode
+                global verbose
                 verbose = True
             # if the directory's path is not in last position
             elif(i != len(sys.argv) - 1):
@@ -64,6 +65,7 @@ def ParseArguments():
                 ShowHelp(False)
             # this is the directory's path
             else:
+                global appDirectory
                 appDirectory = arg
 
 # ScanFiles
