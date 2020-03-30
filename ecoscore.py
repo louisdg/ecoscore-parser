@@ -55,6 +55,7 @@ def ParseArguments():
             if arg == "--help":
                 # show detailed help
                 ShowHelp(True)
+                sys.exit()
             elif arg == "-v" or arg == "--verbose":
                 # activate verbose mode
                 global verbose
@@ -63,6 +64,7 @@ def ParseArguments():
             elif(i != len(sys.argv) - 1):
                 # show help
                 ShowHelp(False)
+                sys.exit()
             # this is the directory's path
             else:
                 global appDirectory
