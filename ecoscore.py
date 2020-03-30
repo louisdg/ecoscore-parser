@@ -66,4 +66,28 @@ def ParseArguments():
             else:
                 appDirectory = arg
 
+# ScanFiles
+#
+# Iterates over all files and subdirectories located in dirPath
+def ListFiles(dirPath):
+    fileLists = {}
+    fileLists["php"] = list()
+    fileLists["js"] = list()
+
+    for subdir, dirs, files in os.walk(dirPath):
+        for file in files:
+            #print os.path.join(subdir, file)
+            filePath = subdir + os.sep + file
+
+            # PHP files
+            if filePath.endswith(".php"):
+                fileLists["php"].append(filePath)
+            # JavaScript files
+            elif filePath.endswith(".js"):
+                fileLists["js"].append(filePath)
+    return fileLists
+
 ParseArguments()
+
+files = ListFiles(appDirectory)
+print(files)
