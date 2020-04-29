@@ -22,6 +22,22 @@ class Color:
     purple = '\033[95m'
     cyan = '\033[96m'
 
+# Impact
+#
+# Represents ecological impact of practices
+class Impact:
+    low = "low"
+    medium = "medium"
+    high = "high"
+
+scoreForImpact = {}
+scoreForImpact[Impact.low] = 1
+scoreForImpact[Impact.medium] = 2
+scoreForImpact[Impact.high] = 3
+
+perfectScore = 0
+appScore = 0
+
 # ShowHelp(detailed)
 #
 # Shows detailed help if detailed is set to true, shows brief help otherwise
