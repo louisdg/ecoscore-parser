@@ -9,6 +9,7 @@ It will give a score to the app depending on how much it respects these practice
 ## Requirements
 
 * `python3`
+* `nltk` package for `python3`: install with `pip3 install –-user nltk`
 
 ## Usage
 
