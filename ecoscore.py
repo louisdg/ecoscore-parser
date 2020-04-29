@@ -77,6 +77,8 @@ def ListFiles(dirPath):
     fileLists = {}
     fileLists["php"] = list()
     fileLists["js"] = list()
+    fileLists["html"] = list()
+    fileLists["css"] = list()
 
     for subdir, dirs, files in os.walk(dirPath):
         for file in files:
@@ -89,6 +91,12 @@ def ListFiles(dirPath):
             # JavaScript files
             elif filePath.endswith(".js"):
                 fileLists["js"].append(filePath)
+            # HTML files
+            elif filePath.endswith(".html"):
+                fileLists["html"].append(filePath)
+            # CSS files
+            elif filePath.endswith(".css"):
+                fileLists["css"].append(filePath)
             # Add more file types here if needed
     return fileLists
 
@@ -97,7 +105,9 @@ ParseArguments()
 files = ListFiles(appDirectory)
 nPhp = len(files["php"])
 nJs = len(files["js"])
-print("Found " + str(nPhp) + " PHP files and " + str(nJs) + " JS files, for a total of " + str(nPhp + nJs) + " files.")
+nHtml = len(files["html"])
+nCss = len(files["css"])
+print("Found " + str(nPhp) + " PHP files, " + str(nJs) + " JS files, " + str(nHtml) + " HTML files and " + str(nCss) + " CSS files, for a total of " + str(nPhp + nJs + nHtml + nCss) + " files.")
 if verbose:
     for lang, filePaths in files.items():
         print(lang + ":")
