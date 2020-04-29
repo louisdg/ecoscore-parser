@@ -180,11 +180,6 @@ nJs = len(files["js"])
 nHtml = len(files["html"])
 nCss = len(files["css"])
 print("Found " + str(nPhp) + " PHP files, " + str(nJs) + " JS files, " + str(nHtml) + " HTML files and " + str(nCss) + " CSS files, for a total of " + str(nPhp + nJs + nHtml + nCss) + " files.")
-if verbose:
-    for lang, filePaths in files.items():
-        print(lang + ":")
-        for filePath in filePaths:
-            print("\t" + filePath)
 
 CheckPractices(files)
 
