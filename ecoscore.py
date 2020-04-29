@@ -162,6 +162,16 @@ def CheckPractices(fileLists):
             for filePath in filePaths:
                 CheckPracticesCSS(filePath)
 
+# ShowScore
+#
+# Shows the perfect score (if every practice is respected) and the score the app got
+def ShowScore():
+    global perfectScore
+    global appScore
+
+    print("Your application got a total score of " + Color.green + str(appScore) + Color.end + " out of a possible " + Color.bold + str(perfectScore) + Color.end + ".")
+    print("Percentage: " + "%.2f" % (appScore / perfectScore * 100) + "%")
+
 ParseArguments()
 
 files = ListFiles(appDirectory)
@@ -177,3 +187,5 @@ if verbose:
             print("\t" + filePath)
 
 CheckPractices(files)
+
+ShowScore()
