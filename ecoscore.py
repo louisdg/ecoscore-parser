@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 
 import os, sys
+from nltk.tokenize import RegexpTokenizer
 
 appDirectory = ""
 verbose = False
@@ -118,6 +119,87 @@ def ListFiles(dirPath):
             # Add more file types here if needed
     return fileLists
 
+# PrintImpact
+#
+# prints given impact to the console with the right colours
+def PrintImpact(impact):
+    color = Color.end
+    if impact == Impact.low:
+        color = Color.green
+    elif impact == Impact.medium:
+        color = Color.yellow
+    elif impact == Impact.high:
+        color = Color.red
+    print(Color.end + "\t\tImpact: " + color + impact + Color.end)
+
+# CheckPractice34
+#
+# Checks if there are no try ... catch ... finally
+def CheckPractice34(filePath, text):
+    global verbose
+    global perfectScore
+    global appScore
+
+    # impact of this practice
+    impact = Impact.low
+
+    # increase the perfect score in any case
+    perfectScore += scoreForImpact[impact]
+
+    # use regex to find try ... catch ... finally
+    tokenizer = RegexpTokenizer('try\s*{[^}]*}\s*(catch\s*\([\w\s]+\)\s*{[^}]*}\s*|finally\s*{[^}]*}\s*)')
+    matches = tokenizer.tokenize(text)
+
+    if len(matches) == 0:
+        # there are no matches, practice is respected
+        # we increase the score of the app
+        appScore += scoreForImpact[impact]
+        if verbose:
+            print("\tPractice 34: " + Color.green + "YES" + Color.end)
+    else:
+        # practice isn't respected
+        if verbose:
+            print("\tPractice 34: " + Color.red + "NO" + Color.end + "\n\t\tThere are " + Color.bold + str(len(matches)) + Color.end + " infringements to correct:")
+            # show infringements and the impact of this practice
+            print(Color.grey)
+            for match in matches:
+                print(match + "\n")
+            PrintImpact(impact)
+
+# CheckPractice41
+#
+# Checks if there are no for ... in
+def CheckPractice41(filePath, text):
+    global verbose
+    global perfectScore
+    global appScore
+
+    # impact of this practice
+    impact = Impact.medium
+
+    # increase the perfect score in any case
+    perfectScore += scoreForImpact[impact]
+
+    # use regex to find for ... in
+    tokenizer = RegexpTokenizer('for\s*\([^)]* +in +[^)]*\)')
+    matches = tokenizer.tokenize(text)
+
+    if len(matches) == 0:
+        # there are no matches, practice is respected
+        # we increase the score of the app
+        appScore += scoreForImpact[impact]
+        if verbose:
+            print("\tPractice 41: " + Color.green + "YES" + Color.end)
+    else:
+        # practice isn't respected
+        if verbose:
+            print("\tPractice 41: " + Color.red + "NO" + Color.end + "\n\t\tThere are " + Color.bold + str(len(matches)) + Color.end + " infringements to correct:")
+            # show infringements and the impact of this practice
+            print(Color.grey)
+            for match in matches:
+                print(match + "\n")
+            PrintImpact(impact)
+
 # CheckPracticesPHP
 #
 # Checks if the file at the given path respects recommended practices for server code
@@ -128,7 +210,13 @@ def CheckPracticesPHP(filePath):
 #
 # Checks if the file at the given path respects recommended practices for client code
 def CheckPracticesJS(filePath):
-    pass
+    global verbose
+    with open(filePath, "r") as file:
+        if verbose:
+            print(Color.cyan + filePath + Color.end + ":")
+        content = file.read()
+        CheckPractice34(filePath, content)
+        CheckPractice41(filePath, content)
 
 # CheckPracticesHTML
 #
