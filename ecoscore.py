@@ -14,6 +14,7 @@ class Color:
     bold = '\033[1m'
     underline = '\033[4m'
     darkcyan = '\033[36m'
+    grey = '\033[90m'
     red = '\033[91m'
     green = '\033[92m'
     yellow = '\033[93m'
