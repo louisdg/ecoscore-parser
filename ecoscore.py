@@ -47,6 +47,7 @@ def ParseArguments():
     if len(sys.argv) <= 1:
         # show help
         ShowHelp(False)
+        sys.exit()
     else:
         # look at arguments
         for i in range(1, len(sys.argv)):
