@@ -89,12 +89,15 @@ def ListFiles(dirPath):
             # JavaScript files
             elif filePath.endswith(".js"):
                 fileLists["js"].append(filePath)
+            # Add more file types here if needed
     return fileLists
 
 ParseArguments()
 
 files = ListFiles(appDirectory)
-print("Found " + str(len(files["php"])) + " PHP files and " + str(len(files["js"])) + " JS files, for a total of " + str(len(files["php"]) + len(files["js"])) + " files.")
+nPhp = len(files["php"])
+nJs = len(files["js"])
+print("Found " + str(nPhp) + " PHP files and " + str(nJs) + " JS files, for a total of " + str(nPhp + nJs) + " files.")
 if verbose:
     for lang, filePaths in files.items():
         print(lang + ":")
