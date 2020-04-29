@@ -101,6 +101,50 @@ def ListFiles(dirPath):
             # Add more file types here if needed
     return fileLists
 
+# CheckPracticesPHP
+#
+# Checks if the file at the given path respects recommended practices for server code
+def CheckPracticesPHP(filePath):
+    pass
+
+# CheckPracticesJS
+#
+# Checks if the file at the given path respects recommended practices for client code
+def CheckPracticesJS(filePath):
+    pass
+
+# CheckPracticesHTML
+#
+# Checks if the file at the given path respects recommended practices for HTML
+def CheckPracticesHTML(filePath):
+    pass
+
+# CheckPracticesCSS
+#
+# Checks if the file at the given path respects recommended practices for CSS
+def CheckPracticesCSS(filePath):
+    pass
+
+# CheckPractices
+#
+# Checks practices for all files in a dictionary
+def CheckPractices(fileLists):
+    for lang, filePaths in files.items():
+        # depending on file type, we don't check for the same practices
+        if lang == "php":
+            for filePath in filePaths:
+                CheckPracticesPHP(filePath)
+                CheckPracticesHTML(filePath) # php files can also contain html
+        elif lang == "js":
+            for filePath in filePaths:
+                CheckPracticesJS(filePath)
+        elif lang == "html":
+            for filePath in filePaths:
+                CheckPracticesHTML(filePath)
+        elif lang == "css":
+            for filePath in filePaths:
+                CheckPracticesCSS(filePath)
+
 ParseArguments()
 
 files = ListFiles(appDirectory)
@@ -114,3 +158,5 @@ if verbose:
         print(lang + ":")
         for filePath in filePaths:
             print("\t" + filePath)
+
+CheckPractices(files)
