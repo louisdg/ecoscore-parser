@@ -147,7 +147,7 @@ def CheckPractice34(filePath, text):
     perfectScore += scoreForImpact[impact]
 
     # use regex to find try ... catch ... finally
-    tokenizer = RegexpTokenizer('try\s*{[^}]*}\s*(catch\s*\([\w\s]+\)\s*{[^}]*}\s*|finally\s*{[^}]*}\s*)')
+    tokenizer = RegexpTokenizer('try\\s*{[^}]*}\\s*(catch\\s*\([\\w\\s]+\\)\\s*{[^}]*}\\s*|finally\s*{[^}]*}\\s*)')
     matches = tokenizer.tokenize(text)
 
     if len(matches) == 0:
@@ -177,7 +177,7 @@ def CheckPractice35(filePath, text):
     # impact of this practice
     impact = Impact.medium
     # use regex to find min(), max(), push(), shift(), pop(), unshift(), splice(), round(), ceil(), floor(), abs()
-    tokenizer = RegexpTokenizer('(min\*s\(|max\s*\(|push\s*\(|shift\s*\(|pop\s*\(|unshift\s*\(|splice\s*\(|round\s*\(|ceil\s*\(|floor\s*\(|abs\s*\()')
+    tokenizer = RegexpTokenizer('\\b(min|max|push|shift|pop|unshift|splice|round|ceil|floor|abs)\\s*([^)]*)')
     matches = tokenizer.tokenize(text)
 
     if len(matches) > 0:
@@ -212,7 +212,7 @@ def CheckPractice38(filePath, text):
     tokenizer = RegexpTokenizer('\\bfunction\\b');
     any_matches = tokenizer.tokenize(text)
     # use regex to find anonymous functions
-    tokenizer = RegexpTokenizer('\\bfunction\\s*\(\\s*\)');
+    tokenizer = RegexpTokenizer('\\bfunction\\s*\\(\\s*\\)');
     anon_matches = tokenizer.tokenize(text)
 
     if len(any_matches) != 0:
@@ -254,7 +254,7 @@ def CheckPractice41(filePath, text):
     perfectScore += scoreForImpact[impact]
 
     # use regex to find for ... in
-    tokenizer = RegexpTokenizer('for\s*\([^)]* +in +[^)]*\)')
+    tokenizer = RegexpTokenizer('for\\s*\\([^)]* +in +[^)]*\\)')
     matches = tokenizer.tokenize(text)
 
     if len(matches) == 0:
