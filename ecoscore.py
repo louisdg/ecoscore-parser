@@ -166,6 +166,37 @@ def CheckPractice34(filePath, text):
                 print(match + "\n")
             PrintImpact(impact)
 
+# CheckPractice35
+#
+# Checks if primitive operations were preferred
+def CheckPractice35(filePath, text):
+    global verbose
+    global perfectScore
+    global appScore
+
+    # impact of this practice
+    impact = Impact.medium
+    # use regex to find min(), max(), push(), shift(), pop(), unshift(), splice(), round(), ceil(), floor(), abs()
+    tokenizer = RegexpTokenizer('(min\(\s*|max\(\s*|push\(\s*|shift\(\s*|pop\(\s*|unshift\(\s*|splice\(\s*|round\(\s*|ceil\(\s*|floor\(\s*|abs\(\s*)')
+    matches = tokenizer.tokenize(text)
+
+    if len(matches) > 0:
+        # increase the perfect score if at least one of these functions were found
+        perfectScore += scoreForImpact[impact]
+        # there are matches, practice is NOT respected
+        # we increase the perfect score without increasing the score app
+        if verbose:
+            print("\tPractice 34: " + Color.red + "NO" + Color.end + "\n\t\tThere are " + Color.bold + str(len(matches)) + Color.end + " infringements to correct:")
+            # show infringements and the impact of this practice
+            print(Color.grey)
+            for match in matches:
+                print(match + "\n")
+            PrintImpact(impact)
+    else:
+        # practice is respected
+        if verbose:
+            print("\tPractice 35: " + Color.green + "YES" + Color.end)
+
 # CheckPractice38
 #
 # Checks for the usage of anonymous functions
@@ -258,6 +289,7 @@ def CheckPracticesJS(filePath):
             print(Color.cyan + filePath + Color.end + ":")
         content = file.read()
         CheckPractice34(filePath, content)
+        CheckPractice35(filePath, content)
         CheckPractice38(filePath, content)
         CheckPractice41(filePath, content)
 
