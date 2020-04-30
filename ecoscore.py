@@ -532,7 +532,7 @@ def CheckPracticesPHP(filePath):
     global verbose
     with open(filePath, "r") as file:
         if verbose:
-            print(Color.cyan + filePath + Color.end + ":")
+            print(Color.blue + filePath + Color.end + ":")
         content = file.read()
         CheckPractice64(filePath, content)
         CheckPractice69(filePath, content)
@@ -546,7 +546,7 @@ def CheckPracticesJS(filePath):
     global verbose
     with open(filePath, "r") as file:
         if verbose:
-            print(Color.cyan + filePath + Color.end + ":")
+            print(Color.purple + filePath + Color.end + ":")
         content = file.read()
         CheckPractice34(filePath, content)
         CheckPractice35(filePath, content)
