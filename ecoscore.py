@@ -380,6 +380,44 @@ def CheckPractice69(filePath, text):
             # show the impact of this practice
             PrintImpact(impact)
 
+# CheckPractice70
+#
+# Checks if ++$i is used instead of $i++
+def CheckPractice70(filePath, text):
+    global verbose
+    global perfectScore
+    global appScore
+
+    # impact of this practice
+    impact = Impact.low
+
+    # use regex to find ++$i
+    tokenizer = RegexpTokenizer('\\+\\+\\s*\\$[A-Za-z]\\w*')
+    ppi_matches = tokenizer.tokenize(text)
+    # use regex to find $i++
+    tokenizer = RegexpTokenizer('\\$[A-Za-z]\\w*\\s*\\+\\+')
+    ipp_matches = tokenizer.tokenize(text)
+
+    nPpi = len(ppi_matches)
+    nIpp = len(ipp_matches)
+
+    appScore += scoreForImpact[impact] * nPpi
+    perfectScore += scoreForImpact[impact] * (nPpi + nIpp)
+
+    # if there are $i++
+    if nIpp == 0:
+        # there are no pairs of double quotes, the practice is respected
+        # we increase the score of the app
+        appScore += scoreForImpact[impact]
+        if verbose:
+            print("\tPractice 70: " + Color.green + "YES" + Color.end)
+    else:
+        # practice isn't respected
+        if verbose:
+            print("\tPractice 70: " + Color.red + "NO" + Color.end + "\n\t\tReplace the " + Color.bold + str(nIpp) + Color.end + " variable increments of the form " + Color.bold + "$i++" + Color.end + " by " + Color.bold + "++$i." + Color.end)
+            # show the impact of this practice
+            PrintImpact(impact)
+
 # CheckPracticesPHP
 #
 # Checks if the file at the given path respects recommended practices for server code
@@ -391,6 +429,7 @@ def CheckPracticesPHP(filePath):
         content = file.read()
         CheckPractice64(filePath, content)
         CheckPractice69(filePath, content)
+        CheckPractice70(filePath, content)
 
 # CheckPracticesJS
 #
