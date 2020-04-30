@@ -166,6 +166,48 @@ def CheckPractice34(filePath, text):
                 print(match + "\n")
             PrintImpact(impact)
 
+# CheckPractice38
+#
+# Checks for the usage of anonymous functions
+def CheckPractice38(filePath, text):
+    global verbose
+    global perfectScore
+    global appScore
+
+    # impact of this practice
+    impact = Impact.low
+
+    # use regex to find any functions
+    tokenizer = RegexpTokenizer('\\bfunction\\b');
+    any_matches = tokenizer.tokenize(text)
+    # use regex to find anonymous functions
+    tokenizer = RegexpTokenizer('\\bfunction\\s*\(\\s*\)');
+    anon_matches = tokenizer.tokenize(text)
+
+    if len(any_matches) != 0:
+        # we found at least one function
+        # increase the perfect score
+        perfectScore += scoreForImpact[impact]
+
+        # test for anonymous functions
+        if len(anon_matches) != 0:
+            # practice is respected
+            # we found at least one anonymous function
+            # increase the score of the app
+            appScore += scoreForImpact[impact]
+            if verbose:
+                print("\tPractice 38: " + Color.green + "YES" + Color.end)
+        else:
+            # practice isn't respected
+            # we found no anonymous functions
+            if verbose:
+                print("\tPractice 38: " + Color.red + "NO" + Color.end + "\n\t\tCheck if there are some functions you could anonymise.")
+                # show infringements and the impact of this practice
+                PrintImpact(impact)
+    else:
+        if verbose:
+            print("\tPractice 38: " + Color.green + "YES" + Color.end)
+
 # CheckPractice41
 #
 # Checks if there are no for ... in
@@ -216,6 +258,7 @@ def CheckPracticesJS(filePath):
             print(Color.cyan + filePath + Color.end + ":")
         content = file.read()
         CheckPractice34(filePath, content)
+        CheckPractice38(filePath, content)
         CheckPractice41(filePath, content)
 
 # CheckPracticesHTML
