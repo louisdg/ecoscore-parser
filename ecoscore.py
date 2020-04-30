@@ -310,6 +310,37 @@ def CheckPractice64(filePath, text):
             # show the impact of this practice
             PrintImpact(impact)
 
+# CheckPractice69
+#
+# Checks if there are no double quotes
+def CheckPractice69(filePath, text):
+    global verbose
+    global perfectScore
+    global appScore
+
+    # impact of this practice
+    impact = Impact.medium
+
+    # increase the perfect score in any case
+    perfectScore += scoreForImpact[impact]
+
+    # use regex to find any pair of double quotes
+    tokenizer = RegexpTokenizer('"[^"]*"')
+    matches = tokenizer.tokenize(text)
+
+    if len(matches) == 0:
+        # there are no pairs of double quotes, the practice is respected
+        # we increase the score of the app
+        appScore += scoreForImpact[impact]
+        if verbose:
+            print("\tPractice 69: " + Color.green + "YES" + Color.end)
+    else:
+        # practice isn't respected
+        if verbose:
+            print("\tPractice 69: " + Color.red + "NO" + Color.end + "\n\t\tUse simple quotes (" + Color.bold + "'" + Color.end + ") instead of double quotes (" + Color.bold + "\"" + Color.end + ").")
+            # show the impact of this practice
+            PrintImpact(impact)
+
 # CheckPracticesPHP
 #
 # Checks if the file at the given path respects recommended practices for server code
@@ -320,6 +351,7 @@ def CheckPracticesPHP(filePath):
             print(Color.cyan + filePath + Color.end + ":")
         content = file.read()
         CheckPractice64(filePath, content)
+        CheckPractice69(filePath, content)
 
 # CheckPracticesJS
 #
