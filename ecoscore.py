@@ -456,6 +456,36 @@ def CheckPractice70(filePath, text):
             # show the impact of this practice
             PrintImpact(impact)
 
+# CheckPractice73
+#
+# Checks if there are no SELECT * FROM
+def CheckPractice73(filePath, text):
+    global verbose
+    global perfectScore
+    global appScore
+
+    # impact of this practice
+    impact = Impact.high
+
+    # use regex to find SELECT * FROM
+    tokenizer = RegexpTokenizer('[Ss][Ee][Ll][Ee][Cc][Tt]\\s+\\*\\s+[Ff][Rr][Oo][Mm]')
+    matches = tokenizer.tokenize(text)
+
+    nMatches = len(matches)
+
+    if nMatches == 0:
+        # there are no SELECT * FROM, the practice is respected
+        if verbose:
+            print("\tPractice 73: " + Color.green + "YES" + Color.end)
+    else:
+        # practice isn't respected
+        # increase perfectScore by how many SELECT * FROM there are
+        perfectScore += scoreForImpact[impact] * nMatches
+        if verbose:
+            print("\tPractice 73: " + Color.red + "NO" + Color.end + "\n\t\tRemove the " + Color.bold + str(nMatches) + Color.end + " uses of " + Color.bold + "SELECT * FROM" + Color.end + " in your queries.")
+            # show the impact of this practice
+            PrintImpact(impact)
+
 # CheckPracticesPHP
 #
 # Checks if the file at the given path respects recommended practices for server code
@@ -468,6 +498,7 @@ def CheckPracticesPHP(filePath):
         CheckPractice64(filePath, content)
         CheckPractice69(filePath, content)
         CheckPractice70(filePath, content)
+        CheckPractice73(filePath, content)
 
 # CheckPracticesJS
 #
