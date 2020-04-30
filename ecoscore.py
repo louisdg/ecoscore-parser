@@ -277,7 +277,11 @@ def CheckPractice41(filePath, text):
 #
 # Checks if the file at the given path respects recommended practices for server code
 def CheckPracticesPHP(filePath):
-    pass
+    global verbose
+    with open(filePath, "r") as file:
+        if verbose:
+            print(Color.cyan + filePath + Color.end + ":")
+        content = file.read()
 
 # CheckPracticesJS
 #
