@@ -177,7 +177,7 @@ def CheckPractice35(filePath, text):
     # impact of this practice
     impact = Impact.medium
     # use regex to find min(), max(), push(), shift(), pop(), unshift(), splice(), round(), ceil(), floor(), abs()
-    tokenizer = RegexpTokenizer('\\b(min|max|push|shift|pop|unshift|splice|round|ceil|floor|abs)\\s*([^)]*)')
+    tokenizer = RegexpTokenizer('\\b(min|max|push|shift|pop|unshift|splice|round|ceil|floor|abs)\\s*\\([^\\)]*\\)')
     matches = tokenizer.tokenize(text)
 
     if len(matches) > 0:
@@ -186,7 +186,7 @@ def CheckPractice35(filePath, text):
         # there are matches, practice is NOT respected
         # we increase the perfect score without increasing the score app
         if verbose:
-            print("\tPractice 34: " + Color.red + "NO" + Color.end + "\n\t\tThere are " + Color.bold + str(len(matches)) + Color.end + " infringements to correct:")
+            print("\tPractice 35: " + Color.red + "NO" + Color.end + "\n\t\tThere are " + Color.bold + str(len(matches)) + Color.end + " infringements to correct:")
             # show infringements and the impact of this practice
             print(Color.grey)
             for match in matches:
