@@ -261,22 +261,22 @@ def CheckPractice39(filePath, text):
         # increase the perfect score and appScore if at least there are optimal uses of chain concatenator
         perfectScore += scoreForImpact[impact]*len(good_matches)
         appScore += scoreForImpact[impact]*len(good_matches)
-        if len(bad_matches) > 0:
-            # increase the perfect score if at least there is one non optimal use of chain concatenator
-            perfectScore += scoreForImpact[impact]*len(bad_matches)
-            # there are matches, practice is NOT respected
-            # we increase the perfect score without increasing the score app
-            if verbose:
-                print("\tPractice 39: " + Color.red + "NO" + Color.end + "\n\t\tThere are " + Color.bold + str(len(bad_matches)) + Color.end + " infringements to correct:")
-                # show infringements and the impact of this practice
-                print(Color.grey)
-                for match in bad_matches:
-                    print(match + "\n")
-                PrintImpact(impact)
-        else:
-            # practice is respected
-            if verbose:
-                print("\tPractice 39: " + Color.green + "YES" + Color.end)
+    if len(bad_matches) > 0:
+        # increase the perfect score if at least there is one non optimal use of chain concatenator
+        perfectScore += scoreForImpact[impact]*len(bad_matches)
+        # there are matches, practice is NOT respected
+        # we increase the perfect score without increasing the score app
+        if verbose:
+            print("\tPractice 39: " + Color.red + "NO" + Color.end + "\n\t\tThere are " + Color.bold + str(len(bad_matches)) + Color.end + " infringements to correct:")
+            # show infringements and the impact of this practice
+            print(Color.grey)
+            for match in bad_matches:
+                print(match + "\n")
+            PrintImpact(impact)
+    else:
+        # practice is respected
+        if verbose:
+            print("\tPractice 39: " + Color.green + "YES" + Color.end)
 
 # CheckPractice40
 #
@@ -350,11 +350,85 @@ def CheckPractice41(filePath, text):
                 print(match + "\n")
             PrintImpact(impact)
 
+# CheckPractice64
+#
+# Checks if there are no function calls in for loops declarations
+def CheckPractice64(filePath, text):
+    global verbose
+    global perfectScore
+    global appScore
+
+    # impact of this practice
+    impact = Impact.high
+
+    # use regex to find any for loops
+    tokenizer = RegexpTokenizer('\\bfor\\b')
+    for_matches = tokenizer.tokenize(text)
+    # use regex to find for loops without function calls in their declaration
+    tokenizer = RegexpTokenizer('\\bfor\\s*\\([^;]*;[^\\);]*;[^\\)]*\\)\\s*[^\\)]')
+    nof_matches = tokenizer.tokenize(text)
+
+    nNof = len(nof_matches)
+    nFor = len(for_matches)
+
+    appScore += scoreForImpact[impact] * nNof
+    perfectScore += scoreForImpact[impact] * nFor
+
+    # if there are as many total for loops as ones without func calls
+    if nNof == nFor:
+        # there are no infringements, the practice is respected
+        # we increase the score of the app
+        if verbose:
+            print("\tPractice 64: " + Color.green + "YES" + Color.end)
+    else:
+        # practice isn't respected
+        if verbose:
+            print("\tPractice 64: " + Color.red + "NO" + Color.end + "\n\t\tThere are " + Color.bold + str(nFor - nNof) + Color.end + " for loop declarations that have function calls in them.")
+            # show the impact of this practice
+            PrintImpact(impact)
+
+# CheckPractice69
+#
+# Checks if there are no double quotes
+def CheckPractice69(filePath, text):
+    global verbose
+    global perfectScore
+    global appScore
+
+    # impact of this practice
+    impact = Impact.medium
+
+    # increase the perfect score in any case
+    perfectScore += scoreForImpact[impact]
+
+    # use regex to find any pair of double quotes
+    tokenizer = RegexpTokenizer('"[^"]*"')
+    matches = tokenizer.tokenize(text)
+
+    if len(matches) == 0:
+        # there are no pairs of double quotes, the practice is respected
+        # we increase the score of the app
+        appScore += scoreForImpact[impact]
+        if verbose:
+            print("\tPractice 69: " + Color.green + "YES" + Color.end)
+    else:
+        # practice isn't respected
+        if verbose:
+            print("\tPractice 69: " + Color.red + "NO" + Color.end + "\n\t\tUse simple quotes (" + Color.bold + "'" + Color.end + ") instead of double quotes (" + Color.bold + "\"" + Color.end + ").")
+            # show the impact of this practice
+            PrintImpact(impact)
+
 # CheckPracticesPHP
 #
 # Checks if the file at the given path respects recommended practices for server code
 def CheckPracticesPHP(filePath):
-    pass
+    global verbose
+    with open(filePath, "r") as file:
+        if verbose:
+            print(Color.cyan + filePath + Color.end + ":")
+        content = file.read()
+        CheckPractice64(filePath, content)
+        CheckPractice69(filePath, content)
 
 # CheckPracticesJS
 #
