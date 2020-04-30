@@ -296,11 +296,11 @@ def CheckPractice40(filePath, text):
     good_matches = tokenizer.tokenize(text)
 
     if len(good_matches) > 0:
-        # increase the perfect score and appScore if at least there are optimal uses of chain concatenator
+        # increase the perfect score and appScore if there is no string as argument in the call of setTimeOut or setInterval
         perfectScore += scoreForImpact[impact]*len(good_matches)
         appScore += scoreForImpact[impact]*len(good_matches)
     if len(bad_matches) > 0:
-        # increase the perfect score if at least there is one non optimal use of chain concatenator
+        # increase the perfect score if there is string as argument in the call of setTimeOut or setInterval
         perfectScore += scoreForImpact[impact]*len(bad_matches)
         # there are matches, practice is NOT respected
         # we increase the perfect score without increasing the score app
