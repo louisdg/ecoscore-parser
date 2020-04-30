@@ -177,7 +177,7 @@ def CheckPractice35(filePath, text):
     # impact of this practice
     impact = Impact.medium
     # use regex to find min(), max(), push(), shift(), pop(), unshift(), splice(), round(), ceil(), floor(), abs()
-    tokenizer = RegexpTokenizer('(min\(\s*|max\(\s*|push\(\s*|shift\(\s*|pop\(\s*|unshift\(\s*|splice\(\s*|round\(\s*|ceil\(\s*|floor\(\s*|abs\(\s*)')
+    tokenizer = RegexpTokenizer('(min\*s\(|max\s*\(|push\s*\(|shift\s*\(|pop\s*\(|unshift\s*\(|splice\s*\(|round\s*\(|ceil\s*\(|floor\s*\(|abs\s*\()')
     matches = tokenizer.tokenize(text)
 
     if len(matches) > 0:
