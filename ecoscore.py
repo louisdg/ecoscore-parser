@@ -595,8 +595,18 @@ def ShowScore():
     global perfectScore
     global appScore
 
-    print("Your application got a total score of " + Color.green + str(appScore) + Color.end + " out of a possible " + Color.bold + str(perfectScore) + Color.end + ".")
-    print("Percentage: " + "%.2f" % (appScore / perfectScore * 100) + "%")
+    percentage = appScore / perfectScore * 100;
+
+    color = Color.end
+    if percentage >= 80:
+        color = Color.green
+    elif percentage >= 50:
+        color = Color.yellow
+    else:
+        color = Color.red
+
+    print("Your application got a total score of " + color + str(appScore) + Color.end + " out of a possible " + Color.bold + str(perfectScore) + Color.end + ".")
+    print("Percentage: " + color + "%.2f" % percentage + Color.end + Color.bold + "%" + Color.end)
 
 ParseArguments()
 
