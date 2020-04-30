@@ -261,22 +261,22 @@ def CheckPractice39(filePath, text):
         # increase the perfect score and appScore if at least there are optimal uses of chain concatenator
         perfectScore += scoreForImpact[impact]*len(good_matches)
         appScore += scoreForImpact[impact]*len(good_matches)
-        if len(bad_matches) > 0:
-            # increase the perfect score if at least there is one non optimal use of chain concatenator
-            perfectScore += scoreForImpact[impact]*len(bad_matches)
-            # there are matches, practice is NOT respected
-            # we increase the perfect score without increasing the score app
-            if verbose:
-                print("\tPractice 39: " + Color.red + "NO" + Color.end + "\n\t\tThere are " + Color.bold + str(len(bad_matches)) + Color.end + " infringements to correct:")
-                # show infringements and the impact of this practice
-                print(Color.grey)
-                for match in bad_matches:
-                    print(match + "\n")
-                PrintImpact(impact)
-        else:
-            # practice is respected
-            if verbose:
-                print("\tPractice 39: " + Color.green + "YES" + Color.end)
+    if len(bad_matches) > 0:
+        # increase the perfect score if at least there is one non optimal use of chain concatenator
+        perfectScore += scoreForImpact[impact]*len(bad_matches)
+        # there are matches, practice is NOT respected
+        # we increase the perfect score without increasing the score app
+        if verbose:
+            print("\tPractice 39: " + Color.red + "NO" + Color.end + "\n\t\tThere are " + Color.bold + str(len(bad_matches)) + Color.end + " infringements to correct:")
+            # show infringements and the impact of this practice
+            print(Color.grey)
+            for match in bad_matches:
+                print(match + "\n")
+            PrintImpact(impact)
+    else:
+        # practice is respected
+        if verbose:
+            print("\tPractice 39: " + Color.green + "YES" + Color.end)
 
 # CheckPractice40
 #
