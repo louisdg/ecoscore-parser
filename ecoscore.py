@@ -353,7 +353,7 @@ def CheckPractice41(filePath, text):
 
 # CheckPractice50
 #
-# Checks if there are no for ... in
+# Checks if there is a GET request
 def CheckPractice50(filePath, text):
     global verbose
     global perfectScore
@@ -362,23 +362,23 @@ def CheckPractice50(filePath, text):
     # impact of this practice
     impact = Impact.high
 
-    tokenizer = RegexpTokenizer('(setTimeout|setInterval)\s*\(\s*(\"|\')')
+    tokenizer = RegexpTokenizer('[A-Za-z]\\w*\\.open\\s*\\(\\s*[\\\'\\"]\\s*POST')
     bad_matches = tokenizer.tokenize(text)
 
-    tokenizer = RegexpTokenizer('\\(\\(setTimeout\\)|\\(setInterval\\)\\)\\s*\\(\\s*[^\\(\\\'|\\"\\)]+\\s*')
+    tokenizer = RegexpTokenizer('[A-Za-z]\\w*\\.open\\s*\\(\\s*[\\\'\\"]\\s*GET')
     good_matches = tokenizer.tokenize(text)
 
     if len(good_matches) > 0:
-        # increase the perfect score and appScore if there is no string as argument in the call of setTimeOut or setInterval
+        # increase the perfect score and appScore if there is a GET request
         perfectScore += scoreForImpact[impact]*len(good_matches)
         appScore += scoreForImpact[impact]*len(good_matches)
     if len(bad_matches) > 0:
-        # increase the perfect score if there is string as argument in the call of setTimeOut or setInterval
+        # increase the perfect score if there is a POST request
         perfectScore += scoreForImpact[impact]*len(bad_matches)
         # there are matches, practice is NOT respected
         # we increase the perfect score without increasing the score app
         if verbose:
-            print("\tPractice 40: " + Color.red + "NO" + Color.end + "\n\t\tThere are " + Color.bold + str(len(bad_matches)) + Color.end + " infringements to correct:")
+            print("\tPractice 50: " + Color.red + "NO" + Color.end + "\n\t\tThere are " + Color.bold + str(len(bad_matches)) + Color.end + " infringements to correct:")
             # show infringements and the impact of this practice
             print(Color.grey)
             for match in bad_matches:
@@ -387,7 +387,7 @@ def CheckPractice50(filePath, text):
     else:
         # practice is respected
         if verbose:
-            print("\tPractice 40: " + Color.green + "YES" + Color.end)
+            print("\tPractice 50: " + Color.green + "YES" + Color.end)
 
 # CheckPractice64
 #
@@ -484,7 +484,7 @@ def CheckPracticesJS(filePath):
         CheckPractice39(filePath, content)
         CheckPractice40(filePath, content)
         CheckPractice41(filePath, content)
-        #CheckPractice50(filePath, content)
+        CheckPractice50(filePath, content)
 
 # CheckPracticesHTML
 #
